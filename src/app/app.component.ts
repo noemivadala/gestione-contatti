@@ -26,12 +26,14 @@ import { RouterOutlet } from '@angular/router';
   styles: [],
 })
 export class AppComponent {
+
   constructor(private form: FormBuilder) {}
 
   loginform = this.form.group({
     email: this.form.control('', Validators.compose([Validators.required, Validators.email])),
     password: this.form.control('', Validators.compose([Validators.required])),
   })
+
 
   login(){};
 }
