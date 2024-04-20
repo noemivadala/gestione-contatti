@@ -50,5 +50,7 @@ export class LoginComponent {
   
     // Invia le credenziali al dispatcher
     this.store.dispatch(AuthActions.requestLogin({ credentials }));
+
+    this.loginform.reset();
   }
 };

@@ -14,10 +14,16 @@ export const initialState: AuthState = {
 
 //cambio stato
 const _authReducer = createReducer(
-    initialState,
-    on(AuthActions.loginSuccess, state => ({ ...state, isLoggedIn: true, error: null })), // Azione login con successo
-    on(AuthActions.loginFailure, (state, { error }) => ({ ...state, isLoggedIn: false, error })) // Azione login con fallimento
-)
+  initialState,
+  on(AuthActions.loginSuccess, state => {
+      console.log('Reducer: loginSuccess action dispatched');
+      return { state, isLoggedIn: true, error: null };
+  }), // login con successo
+  on(AuthActions.loginFailure, (state, { error }) => {
+      console.log('Reducer: loginFailure action dispatched');
+      return { ...state, isLoggedIn: false, error };
+  }) // login con fallimento
+);
 
 export interface AppState {
     auth: AuthState;
