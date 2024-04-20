@@ -6,10 +6,13 @@ import { provideClientHydration } from '@angular/platform-browser';
 
 import { provideAnimations } from '@angular/platform-browser/animations';
 import { provideToastr } from 'ngx-toastr';
+import { provideStore } from '@ngrx/store';
+import { provideEffects } from '@ngrx/effects';
+import { authReducer } from './state/auth/auth.reducer';
 
 export const appConfig: ApplicationConfig = {
   providers: [provideRouter(routes), provideClientHydration(),
-    provideAnimations(), // required animations providers
-    provideToastr(), // Toastr providers
-  ]
+    provideAnimations(),
+    provideToastr(), provideEffects(),
+    provideStore({ auth: authReducer})]
 };

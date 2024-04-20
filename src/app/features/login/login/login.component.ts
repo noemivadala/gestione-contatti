@@ -1,12 +1,16 @@
+import { HttpClientModule, HttpClient } from '@angular/common/http';
 import { Component } from '@angular/core';
 import { FormBuilder, ReactiveFormsModule, Validators } from '@angular/forms';
 import { Router } from '@angular/router';
+import { Store } from '@ngrx/store';
 import { ToastrService } from 'ngx-toastr';
+import * as AuthActions from '../../../state/auth/auth.actions'
+import { AppState } from '../../../state/auth/auth.reducer';
 
 @Component({
   selector: 'app-login',
   standalone: true,
-  imports: [ReactiveFormsModule],
+  imports: [ReactiveFormsModule, HttpClientModule],
   template: `
     <div class="container">
       <h2>Login</h2>
@@ -27,22 +31,23 @@ import { ToastrService } from 'ngx-toastr';
 })
 export class LoginComponent {
   
-  constructor(private form: FormBuilder, private router: Router, private toastr: ToastrService) {}
+  constructor(private form: FormBuilder, private router: Router, private toastr: ToastrService, private store: Store<AppState>) {}
 
   loginform = this.form.group({
-    email: this.form.control('', Validators.compose([Validators.required])),
-    password: this.form.control('', Validators.compose([Validators.required])),
-  })
+    username: ['', Validators.required],
+    password: ['', Validators.required]
+  });
 
-
-  login(){
-    if (this.loginform.valid){
-      console.log('login');
-      this.toastr.success('Login effettuato');
-      this.router.navigate(['login']);
-    } else {
-      this.toastr.warning('Inserisci i dati corretti');
-    }
-  };
-
-}
+  login() {
+    const username = this.loginform.value.username ?? '';
+    const password = this.loginform.value.password ?? '';
+  
+    const credentials = {
+      username,
+      password
+    };
+  
+    // Invia le credenziali al dispatcher
+    this.store.dispatch(AuthActions.requestLogin({ credentials }));
+  }
+};
