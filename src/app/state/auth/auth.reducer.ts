@@ -12,11 +12,14 @@ export const initialState: AuthState = {
   error: null
 };
 
+export let IsLog = false;
+
 //cambio stato
 const _authReducer = createReducer(
   initialState,
   on(AuthActions.loginSuccess, state => {
       console.log('Reducer: loginSuccess action dispatched');
+      IsLog = true;
       return { state, isLoggedIn: true, error: null };
   }), // login con successo
   on(AuthActions.loginFailure, (state, { error }) => {

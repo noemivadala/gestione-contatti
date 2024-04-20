@@ -1,13 +1,12 @@
-import { Injectable } from '@angular/core';
-import { CanLoad, Route, UrlSegment } from '@angular/router';
-import { Store, select } from '@ngrx/store';
-import { Observable } from 'rxjs';
-import { map, take } from 'rxjs/operators';
-import { AppState } from '../state/auth/auth.reducer';
+import { inject } from "@angular/core";
+import { Router } from "@angular/router";
+import { IsLog } from '../state/auth/auth.reducer';
 
-@Injectable({
-  providedIn: 'root'
-})
-export class authGuard {
-
+export const authGuard = () => {
+  const router = inject(Router)
+  const isUserLoggedIn = IsLog;
+  if (!isUserLoggedIn) {
+    router.navigateByUrl('login');
+  }
+  return isUserLoggedIn
 }
