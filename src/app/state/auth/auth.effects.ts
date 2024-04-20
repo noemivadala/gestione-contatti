@@ -11,7 +11,7 @@ import { AppState } from './auth.reducer';
 @Injectable()
 export class AuthEffects {
 
-  // Variabile per salvare lo stato attuale
+  // Variabile stato attuale
   private currentAuthState: any;
 
   constructor(
