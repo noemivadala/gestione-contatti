@@ -13,13 +13,13 @@ import { ToastrService } from 'ngx-toastr';
       <form [formGroup]="loginform" (ngSubmit)="login()">
         <div class="form-group">
           <label for="exampleInputEmail1">Email address</label>
-          <input type="email" class="form-control" id="exampleInputEmail1" formControlName="email" aria-describedby="emailHelp" placeholder="Enter email">
+          <input type="text" class="form-control" id="exampleInputEmail1" formControlName="username" placeholder="Enter username">
         </div>
         <div class="form-group">
           <label for="exampleInputPassword1">Password</label>
           <input type="password" class="form-control" id="exampleInputPassword1" formControlName="password" placeholder="Password">
         </div>
-        <button type="submit" class="btn btn-primary">Submit</button>
+        <button type="submit" class="btn btn-primary">Enter</button>
       </form>
     </div>
   `,
@@ -30,7 +30,7 @@ export class LoginComponent {
   constructor(private form: FormBuilder, private router: Router, private toastr: ToastrService) {}
 
   loginform = this.form.group({
-    email: this.form.control('', Validators.compose([Validators.required, Validators.email])),
+    email: this.form.control('', Validators.compose([Validators.required])),
     password: this.form.control('', Validators.compose([Validators.required])),
   })
 
