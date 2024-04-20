@@ -4,8 +4,8 @@ import { FormBuilder, ReactiveFormsModule, Validators } from '@angular/forms';
 import { Router } from '@angular/router';
 import { Store } from '@ngrx/store';
 import { ToastrService } from 'ngx-toastr';
-import * as AuthActions from '../../../state/auth/auth.actions'
-import { AppState } from '../../../state/auth/auth.reducer';
+import * as AuthActions from '../../state/auth/auth.actions'
+import { AppState } from '../../state/auth/auth.reducer';
 
 @Component({
   selector: 'app-login',
@@ -46,6 +46,7 @@ export class LoginComponent {
       username,
       password
     };
+    console.log(credentials);
   
     // Invia le credenziali al dispatcher
     this.store.dispatch(AuthActions.requestLogin({ credentials }));

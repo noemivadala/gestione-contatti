@@ -23,10 +23,12 @@ export class AuthEffects {
           if (isValid) {
             // Se le credenziali sono valide
             this.toastr.success('Login successful');
+            console.log('successo');
             return AuthActions.loginSuccess();
           } else {
             // Se le credenziali non sono valide
             this.toastr.warning('Please enter username and password');
+            console.log('errore');
             return AuthActions.loginFailure({ error: 'Invalid credentials' });
           }
         }),
