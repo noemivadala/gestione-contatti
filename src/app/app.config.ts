@@ -9,10 +9,15 @@ import { provideToastr } from 'ngx-toastr';
 import { provideStore } from '@ngrx/store';
 import { provideEffects } from '@ngrx/effects';
 import { authReducer } from './state/auth/auth.reducer';
+import { AuthEffects } from './state/auth/auth.effects';
+import { provideHttpClient, withFetch } from '@angular/common/http';
 
 export const appConfig: ApplicationConfig = {
-  providers: [provideRouter(routes), provideClientHydration(),
+  providers: [
+    provideRouter(routes), provideClientHydration(),
     provideAnimations(),
-    provideToastr(), provideEffects(),
-    provideStore({ auth: authReducer})]
+    provideToastr(), 
+    provideHttpClient(withFetch()),
+    provideEffects([AuthEffects]),
+    provideStore({ auth: authReducer})],
 };

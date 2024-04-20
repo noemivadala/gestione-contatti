@@ -19,8 +19,8 @@ export class AuthEffects {
     ofType(AuthActions.requestLogin),
     mergeMap(action =>
       this.authService.verifyCredentials(action.credentials).pipe(
-        map(isValid => {
-          if (isValid) {
+        map(response => {
+          if (response && response.success) {
             // Se le credenziali sono valide
             this.toastr.success('Login successful');
             console.log('successo');

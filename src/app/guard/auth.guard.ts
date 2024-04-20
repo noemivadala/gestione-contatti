@@ -1,29 +1,17 @@
-import { Injectable } from '@angular/core';
-import { CanActivate, Router } from '@angular/router';
-import { Store } from '@ngrx/store';
-import { Observable } from 'rxjs';
-import { map } from 'rxjs/operators';
-import { AppState } from '../state/auth/auth.reducer';
+import { inject } from '@angular/core';
+import { Router } from '@angular/router';
 
-@Injectable({
-  providedIn: 'root'
-})
-export class AuthGuard {
+export const authGuard = () => {
+  const router = inject(Router)
+  let isLoggedIn = true;
 
-  constructor(private store: Store<AppState>, private router: Router) {}
-
-  canActivate(): Observable<boolean> {
-    return this.store.select(state => state.auth.isLoggedIn).pipe(
-      map(isLoggedIn => {
-        if (isLoggedIn) {
-          this.router.navigate(['/home']); // Reindirizza l'utente alla home
-          return true;
-        } else {
-          this.router.navigate(['/login']); // Reindirizza l'utente al login
-          return false;
-        }
-      })
-    );
+  if (!isLoggedIn) {
+    router.navigateByUrl('home')
+  } else {
+    router.navigateByUrl('login')
   }
+  return isLoggedIn;
 }
+
+
 
