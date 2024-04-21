@@ -3,8 +3,8 @@ import { JsonPlaceholderService } from '../../service/json-placeholder.service';
 import { UserModel } from '../../../assets/user.model';
 import { FormsModule } from '@angular/forms';
 import { CommonModule } from '@angular/common';
-import { v4 as uuidv4 } from 'uuid';
 import { DeleteUserComponent } from "../../components/delete-user.component";
+import { AddUserComponent } from "../../components/add-user.component";
 
 @Component({
     selector: 'app-home',
@@ -18,7 +18,11 @@ import { DeleteUserComponent } from "../../components/delete-user.component";
       </nav>
     </div>
     <div class="container mb-5">
-      <h2>📑 Lista contatti</h2>
+      <div class="d-flex justify-content-between">
+        <h2>📑 Lista contatti</h2>
+        <button type="button" class="btn btn-light mr-2" data-bs-toggle="offcanvas" data-bs-target="#offcanvasTop" aria-controls="offcanvasTop"><i class="fa-solid fa-user-plus"></i> Aggiungi Contatto</button>
+      </div>
+      <app-add-user></app-add-user>
       <form (ngSubmit)="addUser(newUserForm)" #newUserForm="ngForm">
         <input type="text" name="name" placeholder="Nome" ngModel required>
         <input type="text" name="username" placeholder="Cognome" ngModel required>
@@ -35,7 +39,7 @@ import { DeleteUserComponent } from "../../components/delete-user.component";
             <p>Telefono: {{ user.phone }}</p>
           </div>
           <div class="btn-user">
-            <button class="btn btn-delete" (click)="selectUser(user.id)" type="button" data-bs-toggle="offcanvas" data-bs-target="#offcanvasRight" aria-controls="offcanvasRight"><i class="fa-regular fa-trash-can fa-sm"></i></button>
+            <button class="btn btn-delete" (click)="selectUser(user)" type="button" data-bs-toggle="offcanvas" data-bs-target="#offcanvasRight" aria-controls="offcanvasRight"><i class="fa-regular fa-trash-can fa-sm"></i></button>
             <button class="btn-edit" (click)="editUser(user)"><i class="fa-regular fa-pen-to-square fa-sm"></i></button>
           </div>
         </div>
@@ -57,7 +61,7 @@ import { DeleteUserComponent } from "../../components/delete-user.component";
     
   `,
     styles: ``,
-    imports: [CommonModule, FormsModule, DeleteUserComponent]
+    imports: [CommonModule, FormsModule, DeleteUserComponent, AddUserComponent]
 })
 export class HomeComponent {
 
@@ -81,7 +85,7 @@ export class HomeComponent {
     });
   }
 
-  selectUser(userId: number) {
+  selectUser(userId: UserModel) {
     this.userToSelect = userId;
     console.log('Utente selezionato:', this.userToSelect);
   }
