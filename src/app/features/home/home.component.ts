@@ -35,21 +35,12 @@ import { DeleteUserComponent } from "../../components/delete-user.component";
             <p>Telefono: {{ user.phone }}</p>
           </div>
           <div class="btn-user">
-            <button class="btn btn-delete" type="button" data-bs-toggle="offcanvas" data-bs-target="#offcanvasRight" aria-controls="offcanvasRight"><i class="fa-regular fa-trash-can fa-sm"></i></button>
+            <button class="btn btn-delete" (click)="selectUser(user.id)" type="button" data-bs-toggle="offcanvas" data-bs-target="#offcanvasRight" aria-controls="offcanvasRight"><i class="fa-regular fa-trash-can fa-sm"></i></button>
             <button class="btn-edit" (click)="editUser(user)"><i class="fa-regular fa-pen-to-square fa-sm"></i></button>
           </div>
         </div>
       </div>
-
-      <div class="offcanvas offcanvas-end" tabindex="-1" id="offcanvasRight" aria-labelledby="offcanvasRightLabel">
-        <div class="offcanvas-header">
-          <h5 id="offcanvasRightLabel">Sei sicuro di voler eliminare</h5>
-          <button type="button" class="btn-close text-reset" data-bs-dismiss="offcanvas" aria-label="Close"></button>
-        </div>
-        <div class="offcanvas-body">
-          ...
-        </div>
-      </div>
+      <app-delete-user [data]="userToSelect"></app-delete-user>
 
       <form *ngIf="userToUpdate" class="d-block" (ngSubmit)="editUserForm(editUserValue, userToUpdate)" #editUserValue="ngForm">
         <label for="nome" class="form-label">Nome</label>
@@ -73,6 +64,7 @@ export class HomeComponent {
   users: UserModel[] = [];
   lastUserId: number = 0;
   userToUpdate: UserModel | null = null;
+  userToSelect: any;
 
   constructor(private jsonPlaceholder: JsonPlaceholderService) {}
 
@@ -87,6 +79,11 @@ export class HomeComponent {
       // id più grande
       this.lastUserId = maxId;
     });
+  }
+
+  selectUser(userId: number) {
+    this.userToSelect = userId;
+    console.log('Utente selezionato:', this.userToSelect);
   }
   
   addUser(newUserForm: any) {

@@ -1,5 +1,5 @@
 import { CommonModule } from '@angular/common';
-import { Component, Input } from '@angular/core';
+import { Component, EventEmitter, Input, Output } from '@angular/core';
 import { JsonPlaceholderService } from '../service/json-placeholder.service';
 import { UserModel } from '../../assets/user.model';
 
@@ -11,9 +11,9 @@ import { UserModel } from '../../assets/user.model';
 
     <div class="offcanvas offcanvas-end" tabindex="-1" id="offcanvasRight" aria-labelledby="offcanvasRightLabel">
       <div class="offcanvas-header">
-        <h5 id="offcanvasRightLabel">Sei sicuro di voler eliminare</h5>
-        <p *ngIf="userId">
-          ID dell'utente selezionato: {{ userId }}
+        <h5 id="offcanvasRightLabel">Sei sicuro di voler eliminare {{ data }}</h5>
+        <p>
+          
         </p>
         <button class="btn-delete"><i class="fa-regular fa-trash-can fa-sm"></i></button>
         <button type="button" class="btn-close text-reset" data-bs-dismiss="offcanvas" aria-label="Close"></button>
@@ -28,9 +28,7 @@ import { UserModel } from '../../assets/user.model';
 })
 export class DeleteUserComponent {
 
-  @Input() getUserById: any;
-
-  userId: number | null = null;
+  @Input() data: any;
 
   ngOnInit(): void {
   }
