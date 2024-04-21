@@ -82,6 +82,7 @@ export class HomeComponent {
 
   editUser(user: UserModel) {
     this.userToUpdate = user;
+    console.log(user);
   }
 
   editUserForm(editUserValue: any, userToUpdate: UserModel) {
