@@ -4,12 +4,12 @@ import { UserModel } from '../../../assets/user.model';
 import { FormsModule } from '@angular/forms';
 import { CommonModule } from '@angular/common';
 import { v4 as uuidv4 } from 'uuid';
+import { DeleteUserComponent } from "../../components/delete-user.component";
 
 @Component({
-  selector: 'app-home',
-  standalone: true,
-  imports: [CommonModule, FormsModule],
-  template: `
+    selector: 'app-home',
+    standalone: true,
+    template: `
     <div class="container-full mb-5">
       <nav class="navbar navbar-light bg-light">
         <div class="container-fluid d-flex justify-content-center">
@@ -19,7 +19,6 @@ import { v4 as uuidv4 } from 'uuid';
     </div>
     <div class="container mb-5">
       <h2>📑 Lista contatti</h2>
-      <button>Aggiungi contatto</button>
       <form (ngSubmit)="addUser(newUserForm)" #newUserForm="ngForm">
         <input type="text" name="name" placeholder="Nome" ngModel required>
         <input type="text" name="username" placeholder="Cognome" ngModel required>
@@ -36,16 +35,15 @@ import { v4 as uuidv4 } from 'uuid';
             <p>Telefono: {{ user.phone }}</p>
           </div>
           <div class="btn-user">
+            <button class="btn btn-delete" type="button" data-bs-toggle="offcanvas" data-bs-target="#offcanvasRight" aria-controls="offcanvasRight"><i class="fa-regular fa-trash-can fa-sm"></i></button>
             <button class="btn-edit" (click)="editUser(user)"><i class="fa-regular fa-pen-to-square fa-sm"></i></button>
-            <button class="btn-delete" (click)="deleteUser(user.id)"><i class="fa-regular fa-trash-can fa-sm"></i></button>
           </div>
         </div>
       </div>
-      <button class="btn btn-primary" type="button" data-bs-toggle="offcanvas" data-bs-target="#offcanvasRight" aria-controls="offcanvasRight">Toggle right offcanvas</button>
 
       <div class="offcanvas offcanvas-end" tabindex="-1" id="offcanvasRight" aria-labelledby="offcanvasRightLabel">
         <div class="offcanvas-header">
-          <h5 id="offcanvasRightLabel">Offcanvas right</h5>
+          <h5 id="offcanvasRightLabel">Sei sicuro di voler eliminare</h5>
           <button type="button" class="btn-close text-reset" data-bs-dismiss="offcanvas" aria-label="Close"></button>
         </div>
         <div class="offcanvas-body">
@@ -53,17 +51,22 @@ import { v4 as uuidv4 } from 'uuid';
         </div>
       </div>
 
-      <form *ngIf="userToUpdate" (ngSubmit)="editUserForm(editUserValue, userToUpdate)" #editUserValue="ngForm">
-        <input type="text" name="name" placeholder="Nome" ngModel required>
-        <input type="text" name="username" placeholder="Cognome" ngModel required>
-        <input type="email" name="email" placeholder="Email" ngModel required>
-        <input type="tel" name="phone" placeholder="Telefono" ngModel required>
+      <form *ngIf="userToUpdate" class="d-block" (ngSubmit)="editUserForm(editUserValue, userToUpdate)" #editUserValue="ngForm">
+        <label for="nome" class="form-label">Nome</label>
+        <input type="text" class="form-control" id="nome" name="name" placeholder="Nome" ngModel required>
+        <label for="Cognome" class="form-label">Username</label>
+        <input type="text" class="form-control" id="username" name="username" placeholder="username" ngModel required>
+        <label for="email" class="form-label">Email</label>
+        <input type="email" class="form-control" id="email" name="email" placeholder="email" ngModel required>
+        <label for="telefono" class="form-label">Telefono</label>
+        <input type="tel" class="form-control" id="phone" name="phone" placeholder="telefono" ngModel required>
         <button type="submit">Modifica contatto</button>
       </form>
     </div>
     
   `,
-  styles: ``
+    styles: ``,
+    imports: [CommonModule, FormsModule, DeleteUserComponent]
 })
 export class HomeComponent {
 

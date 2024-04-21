@@ -28,3 +28,10 @@ body {
     width: 36px;
     height: 36px;
 }
+
+@media (max-width: 767.98px) { 
+
+    .card {
+        width: calc(100% - 20px);
+    }
+}
