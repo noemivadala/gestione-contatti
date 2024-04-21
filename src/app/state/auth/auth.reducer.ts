@@ -18,14 +18,17 @@ export let IsLog = false;
 const _authReducer = createReducer(
   initialState,
   on(AuthActions.loginSuccess, state => {
+      // login con successo
       console.log('Reducer: loginSuccess action dispatched');
+      // var guard
       IsLog = true;
       return { state, isLoggedIn: true, error: null };
-  }), // login con successo
+  }),
   on(AuthActions.loginFailure, (state, { error }) => {
+      // login con fallimento
       console.log('Reducer: loginFailure action dispatched');
       return { ...state, isLoggedIn: false, error };
-  }) // login con fallimento
+  })
 );
 
 export interface AppState {
