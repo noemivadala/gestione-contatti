@@ -54,17 +54,6 @@ import { EditUserComponent } from "../../components/edit-user.component";
       <app-delete-user [data]="userToSelect" (deleteConfirmed)="deleteUser($event)"></app-delete-user>
       <app-edit-user [data]="userToSelect" (userDataChanged)="updateUserData($event)"></app-edit-user>
 
-      <form *ngIf="userToUpdate" class="d-block" (ngSubmit)="editUserForm(editUserValue, userToUpdate)" #editUserValue="ngForm">
-        <label for="nome" class="form-label">Nome</label>
-        <input type="text" class="form-control" id="nome" name="name" placeholder="Nome" ngModel required>
-        <label for="Cognome" class="form-label">Username</label>
-        <input type="text" class="form-control" id="username" name="username" placeholder="username" ngModel required>
-        <label for="email" class="form-label">Email</label>
-        <input type="email" class="form-control" id="email" name="email" placeholder="email" ngModel required>
-        <label for="telefono" class="form-label">Telefono</label>
-        <input type="tel" class="form-control" id="phone" name="phone" placeholder="telefono" ngModel required>
-        <button type="submit">Modifica contatto</button>
-      </form>
     </div>
     
   `,
@@ -119,25 +108,6 @@ export class HomeComponent {
   editUser(user: UserModel) {
     this.userToUpdate = user;
     console.log(user);
-  }
-
-  editUserForm(editUserValue: any, userToUpdate: UserModel) {
-    if (editUserValue && editUserValue.valid) {
-      const updatedUser: UserModel = {
-        id: userToUpdate.id,
-        name: editUserValue.value.name,
-        username: editUserValue.value.username,
-        email: editUserValue.value.email,
-        phone: editUserValue.value.phone
-      };
-      this.jsonPlaceholder.editUser(userToUpdate.id, updatedUser).subscribe((updatedUser: UserModel) => {
-        // Aggiorna la lista
-        this.users = this.users.map(u => (u.id === updatedUser.id ? updatedUser : u));
-        console.log(updatedUser);
-    
-        editUserValue.resetForm();
-      });
-    }
   }
 
   updateUserData(event: { field: string, value: any }) {

@@ -60,6 +60,4 @@ export class EditUserComponent {
     this.userDataChanged.emit({ field, value });
   }
 
-  
-
 }
