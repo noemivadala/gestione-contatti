@@ -16,7 +16,7 @@ import { UserModel } from '../../assets/user.model';
       <div class="offcanvas-body">
         <h5 id="offcanvasRightLabel">Sei sicuro di voler eliminare<br>{{ data?.name }}?</h5>
         <button type="button" class="btn btn-light mr-2" data-bs-dismiss="offcanvas">Annulla</button>
-        <button type="button" class="btn btn-danger"><i class="fa-regular fa-trash-can fa-sm"></i> Conferma l'eliminazione</button>
+        <button type="button" class="btn btn-danger" (click)="confirmDeleteUser()"><i class="fa-regular fa-trash-can fa-sm"></i> Conferma l'eliminazione</button>
       </div>
     </div>
 
@@ -26,12 +26,24 @@ import { UserModel } from '../../assets/user.model';
 export class DeleteUserComponent {
 
   @Input() data: UserModel | undefined;
-
-  ngOnInit(): void {
-  }
-
+  @Output() deleteConfirmed = new EventEmitter<number>();
 
   constructor(private jsonPlaceholder: JsonPlaceholderService){}
 
+  confirmDeleteUser() {
+    if (this.data) {
+      this.deleteConfirmed.emit(this.data.id);
+      this.hiddenCanvas();
+    }
+  }
 
+  private hiddenCanvas() {
+    const offcanvasElement = document.getElementById('offcanvasRight');
+    const backdropElement = document.querySelector('.offcanvas-backdrop.fade.show');
+    if (offcanvasElement && backdropElement) {
+      offcanvasElement.classList.toggle('show');
+      offcanvasElement.removeAttribute('aria-modal');
+      backdropElement.remove();
+    }
+  }
 }
