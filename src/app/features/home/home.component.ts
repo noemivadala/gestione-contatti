@@ -17,6 +17,7 @@ import { EditUserComponent } from "../../components/edit-user.component";
         </div>
       </nav>
     </div>
+    
     <div class="container mb-5">
       <div class="d-flex justify-content-between">
         <h2>📑 Lista contatti</h2>
@@ -46,14 +47,12 @@ import { EditUserComponent } from "../../components/edit-user.component";
           </div>
           <div class="btn-user">
             <button class="btn btn-delete" (click)="selectUser(user)" type="button" data-bs-toggle="offcanvas" data-bs-target="#offcanvasRight" aria-controls="offcanvasRight"><i class="fa-regular fa-trash-can fa-sm"></i></button>
-            <button class="btn-edit" (click)="editUser(user)"><i class="fa-regular fa-pen-to-square fa-sm"></i></button>
             <button class="btn btn-edit" (click)="selectUser(user)" type="button" data-bs-toggle="offcanvas" data-bs-target="#offcanvasBottom" aria-controls="offcanvasBottom"><i class="fa-regular fa-pen-to-square fa-sm"></i></button>
           </div>
         </div>
       </div>
       <app-delete-user [data]="userToSelect" (deleteConfirmed)="deleteUser($event)"></app-delete-user>
       <app-edit-user [data]="userToSelect" (userDataChanged)="updateUserData($event)"></app-edit-user>
-
     </div>
     
   `,
