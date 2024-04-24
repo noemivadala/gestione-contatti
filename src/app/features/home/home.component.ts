@@ -1,10 +1,11 @@
 import { Component } from '@angular/core';
 import { JsonPlaceholderService } from '../../service/json-placeholder.service';
 import { UserModel } from '../../../assets/user.model';
-import { FormsModule } from '@angular/forms';
+import { FormsModule} from '@angular/forms';
 import { CommonModule } from '@angular/common';
 import { DeleteUserComponent } from "../../components/delete-user.component";
 import { EditUserComponent } from "../../components/edit-user.component";
+import { ToastrService } from 'ngx-toastr';
 
 @Component({
     selector: 'app-home',
@@ -17,7 +18,7 @@ import { EditUserComponent } from "../../components/edit-user.component";
         </div>
       </nav>
     </div>
-    
+
     <div class="container mb-5">
       <div class="d-flex justify-content-between">
         <h2>📑 Lista contatti</h2>
@@ -26,15 +27,15 @@ import { EditUserComponent } from "../../components/edit-user.component";
         </button>
       </div>
 
-      <div class="container container-card d-inline-flex mt-4">
-        <div class="collapse" id="collapseExample">
+      <div class="container container-card mt-4 d-flex">
+        <div class="collapse w-100" id="collapseExample">
           <div class="card-form">
-            <form (ngSubmit)="addUser(newUserForm)" #newUserForm="ngForm">
-              <input type="text" name="name" placeholder="Nome" ngModel required>
-              <input type="text" name="username" placeholder="Username" ngModel required>
-              <input type="email" name="email" placeholder="Email" ngModel required>
-              <input type="tel" name="phone" placeholder="Telefono" ngModel required>
-              <button type="submit" [ngClass]="!newUserForm.valid ? 'submit-invalid' : 'submit-add'"  [disabled]="!newUserForm.valid"><i class="fa-solid fa-plus"></i></button>
+            <form  class="newUserForm" (ngSubmit)="addUser(newUserForm)" #newUserForm="ngForm">
+                <input type="text" name="name" placeholder="Nome" ngModel required>
+                <input type="text" name="username" placeholder="Username" ngModel required>
+                <input type="email" name="email" placeholder="Email" ngModel required pattern="[^@\s]+@[^@\s]+\.[^@\s]+">
+                <input type="tel" name="phone" placeholder="Telefono" ngModel required pattern="[0-9]{10}">
+                <button type="submit" [ngClass]="!newUserForm.valid ? 'submit-invalid' : 'submit-add'"  [disabled]="!newUserForm.valid"><i class="fa-solid fa-plus"></i></button>
             </form>
           </div>
         </div>
@@ -51,8 +52,8 @@ import { EditUserComponent } from "../../components/edit-user.component";
           </div>
         </div>
       </div>
-      <app-delete-user [data]="userToSelect" (deleteConfirmed)="deleteUser($event)"></app-delete-user>
       <app-edit-user [data]="userToSelect" (userDataChanged)="updateUserData($event)"></app-edit-user>
+      <app-delete-user [data]="userToSelect" (deleteConfirmed)="deleteUser($event)"></app-delete-user>
     </div>
     
   `,
@@ -66,7 +67,7 @@ export class HomeComponent {
   userToUpdate: UserModel | null = null;
   userToSelect: any;
 
-  constructor(private jsonPlaceholder: JsonPlaceholderService) {}
+  constructor(private jsonPlaceholder: JsonPlaceholderService, private toastr: ToastrService) {}
 
   ngOnInit(): void {
     this.loadUsers();
@@ -75,9 +76,10 @@ export class HomeComponent {
   loadUsers(){
     this.jsonPlaceholder.getUsersList().subscribe(users => {
       this.users = users;
-      const maxId = Math.max(...this.users.map(user => user.id));
-      // id più grande
-      this.lastUserId = maxId;
+      if (this.users.length > 0) {
+        const maxId = Math.max(...this.users.map(user => user.id));
+        this.lastUserId = maxId;
+      }
     });
   }
 
@@ -88,21 +90,25 @@ export class HomeComponent {
   
   addUser(newUserForm: any) {
     if (newUserForm && newUserForm.valid) {
+
       const newUser: UserModel = {
-        id: this.lastUserId++,
+        id: this.lastUserId,
         name: newUserForm.value.name,
         username: newUserForm.value.username,
         email: newUserForm.value.email,
         phone: newUserForm.value.phone
-      };
-      this.jsonPlaceholder.createUser(newUser).subscribe((user: UserModel) => {
-        this.users.unshift(user);
-        console.log(user);
-    
+      }
+      this.jsonPlaceholder.createUser(newUser).subscribe((createdUser: UserModel) => {
+        createdUser.id = ++this.lastUserId;
+        this.users.unshift(createdUser); // Aggiunto alla lista
+        this.toastr.success('Utente aggiunto');
         newUserForm.resetForm();
       });
+    } else {
+      this.toastr.error('Controlla i campi del modulo');
     }
   }
+  
 
   editUser(user: UserModel) {
     this.userToUpdate = user;
@@ -119,6 +125,7 @@ export class HomeComponent {
     this.jsonPlaceholder.deleteUser(id).subscribe(() => {
       this.users = this.users.filter(user => user.id !== id);
       this.userToSelect = null;
+      this.toastr.success('Utente aggiunto');
     });
   }
 

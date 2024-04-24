@@ -33,13 +33,13 @@ export class AuthEffects {
         map(response => {
           if (response && response.success) {
             // Se le credenziali sono valide
-            this.toastr.success('Login successful');
+            this.toastr.success('Login effettuato');
             console.log('successo');
             console.log('Stato attuale true:', this.currentAuthState);
             return AuthActions.loginSuccess();
           } else {
             // Se le credenziali non sono valide
-            this.toastr.warning('Please enter username and password');
+            this.toastr.warning('Le credenziali non corrette');
             console.log('errore');
             console.log('Stato attuale false:', this.currentAuthState);
             return AuthActions.loginFailure({ error: 'Invalid credentials' });
@@ -47,10 +47,10 @@ export class AuthEffects {
         }),
         catchError(error => {
           // Gestione errori
-          this.toastr.error('An error occurred during login');
+          this.toastr.error('Errore');
           console.log('Errore:', error);
           console.log('Stato attuale:', this.currentAuthState);
-          return of(AuthActions.loginFailure({ error: 'An error occurred during login' }));
+          return of(AuthActions.loginFailure({ error: 'Errore' }));
         })
       )
     )

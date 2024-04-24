@@ -1,4 +1,4 @@
-import { HttpClientModule, HttpClient } from '@angular/common/http';
+import { HttpClientModule } from '@angular/common/http';
 import { Component } from '@angular/core';
 import { FormBuilder, ReactiveFormsModule, Validators } from '@angular/forms';
 import { Router } from '@angular/router';
@@ -6,24 +6,30 @@ import { Store } from '@ngrx/store';
 import { ToastrService } from 'ngx-toastr';
 import * as AuthActions from '../../state/auth/auth.actions'
 import { AppState } from '../../state/auth/auth.reducer';
+import { CommonModule } from '@angular/common';
 
 @Component({
   selector: 'app-login',
   standalone: true,
-  imports: [ReactiveFormsModule, HttpClientModule],
+  imports: [ReactiveFormsModule, HttpClientModule, CommonModule],
   template: `
-    <div class="container">
-      <h2>Login</h2>
+    <div class="container custom-container">
+      <div>
+        <h2 class="text-center">Benvenuto!</h2>
+        <p class="text-center">Accedi per visualizzare i contenuti</p>
+      </div>
       <form [formGroup]="loginform" (ngSubmit)="login()">
-        <div class="form-group">
-          <label for="exampleInputEmail1">Email address</label>
-          <input type="text" class="form-control" id="exampleInputEmail1" formControlName="username" placeholder="Enter username">
+        <div class="form-group input-group">
+          <input type="text" class="form-control" formControlName="username" placeholder="Enter username">
+          <span class="input-group-text"><i class="fa-regular fa-user" style="color: #7e7e7e"></i></span>
         </div>
-        <div class="form-group">
-          <label for="exampleInputPassword1">Password</label>
-          <input type="password" class="form-control" id="exampleInputPassword1" formControlName="password" placeholder="Password">
+        <div class="form-group input-group">
+          <input type="password" class="form-control" formControlName="password" placeholder="Password">
+          <span class="input-group-text"><i class="fa-regular fa-address-card" style="color: #7e7e7e"></i></span>
         </div>
-        <button type="submit" class="btn btn-primary">Enter</button>
+        <div>
+          <button type="submit" class="btn btn-primary btn-submit" [ngClass]="!loginform.valid ? 'btn-submit-invalid' : 'btn-primary'"  [disabled]="!loginform.valid">Enter</button>
+        </div>
       </form>
     </div>
   `,
