@@ -7,7 +7,6 @@ import { Store } from '@ngrx/store';
 import * as AuthActions from './auth.actions';
 import { AuthService } from '../../service/auth.service';
 import { AppState } from './auth.reducer';
-import { Router } from '@angular/router';
 
 @Injectable()
 export class AuthEffects {
