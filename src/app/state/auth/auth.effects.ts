@@ -1,12 +1,13 @@
 import { Injectable } from '@angular/core';
 import { Actions, ofType, createEffect } from '@ngrx/effects';
 import { ToastrService } from 'ngx-toastr';
-import { of } from 'rxjs';
-import { catchError, map, mergeMap, tap } from 'rxjs/operators';
+import { of, timer } from 'rxjs';
+import { catchError, map, mergeMap, switchMap, tap } from 'rxjs/operators';
 import { Store } from '@ngrx/store';
 import * as AuthActions from './auth.actions';
 import { AuthService } from '../../service/auth.service';
 import { AppState } from './auth.reducer';
+import { Router } from '@angular/router';
 
 @Injectable()
 export class AuthEffects {
@@ -20,9 +21,9 @@ export class AuthEffects {
     private toastr: ToastrService,
     private store: Store<AppState>
   ) {
-    // Salvataggio dello stato attuale nell'istanza dell'effetto
+    // Salvataggio stato attuale
     this.store.select(state => state.auth).pipe(
-      tap(authState => this.currentAuthState = authState)
+      tap(authState => this.currentAuthState = { ...authState }) // clona
     ).subscribe();
   }
 

@@ -108,7 +108,6 @@ export class HomeComponent {
       this.toastr.error('Controlla i campi del modulo');
     }
   }
-  
 
   editUser(user: UserModel) {
     this.userToUpdate = user;

@@ -20,15 +20,15 @@ import { CommonModule } from '@angular/common';
       </div>
       <form [formGroup]="loginform" (ngSubmit)="login()">
         <div class="form-group input-group">
-          <input type="text" class="form-control" formControlName="username" placeholder="Enter username">
+          <input type="text" class="form-control" formControlName="username" placeholder="username">
           <span class="input-group-text"><i class="fa-regular fa-user" style="color: #7e7e7e"></i></span>
         </div>
         <div class="form-group input-group">
-          <input type="password" class="form-control" formControlName="password" placeholder="Password">
+          <input type="password" class="form-control" formControlName="password" placeholder="password">
           <span class="input-group-text"><i class="fa-regular fa-address-card" style="color: #7e7e7e"></i></span>
         </div>
         <div>
-          <button type="submit" class="btn btn-primary btn-submit" [ngClass]="!loginform.valid ? 'btn-submit-invalid' : 'btn-primary'"  [disabled]="!loginform.valid">Enter</button>
+          <button type="submit" class="btn btn-primary btn-submit" [ngClass]="!loginform.valid ? 'btn-submit-invalid' : 'btn-primary'"  [disabled]="!loginform.valid">Entra</button>
         </div>
       </form>
     </div>
