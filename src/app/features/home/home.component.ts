@@ -20,22 +20,24 @@ import { ToastrService } from 'ngx-toastr';
     </div>
 
     <div class="container mb-5">
-      <div class="d-flex justify-content-between">
+      <div class="container d-flex justify-content-between">
         <h2>📑 Lista contatti</h2>
-        <button class="btn btn-light mr-2" type="button" data-bs-toggle="collapse" data-bs-target="#collapseExample" aria-expanded="false" aria-controls="collapseExample">
+        <button class="btn btn-light btn-add-user mr-2" type="button" data-bs-toggle="collapse" data-bs-target="#collapseExample" aria-expanded="false" aria-controls="collapseExample">
           <i class="fa-solid fa-user-plus"></i> Aggiungi Contatto
         </button>
       </div>
 
-      <div class="container container-card mt-4 d-flex">
+      <div class="container container-card d-flex mt-4 ">
         <div class="collapse w-100" id="collapseExample">
           <div class="card-form">
-            <form  class="newUserForm" (ngSubmit)="addUser(newUserForm)" #newUserForm="ngForm">
-                <input type="text" name="name" placeholder="Nome" ngModel required>
-                <input type="text" name="username" placeholder="Username" ngModel required>
-                <input type="email" name="email" placeholder="Email" ngModel required pattern="[^@\s]+@[^@\s]+\.[^@\s]+">
-                <input type="tel" name="phone" placeholder="Telefono" ngModel required pattern="[0-9]{10}">
-                <button type="submit" [ngClass]="!newUserForm.valid ? 'submit-invalid' : 'submit-add'"  [disabled]="!newUserForm.valid"><i class="fa-solid fa-plus"></i></button>
+            <form class="newUserForm" (ngSubmit)="addUser(newUserForm)" #newUserForm="ngForm">
+              <div class="grid-container-5">
+                <input type="text" name="name" placeholder="Nome" ngModel required class="grid-item">
+                <input type="text" name="username" placeholder="Username" ngModel required class="grid-item">
+                <input type="email" name="email" placeholder="Email" ngModel required pattern="[^@\s]+@[^@\s]+\.[^@\s]+" class="grid-item">
+                <input type="tel" name="phone" placeholder="Telefono" ngModel required pattern="[0-9]{10}" class="grid-item">
+                <button type="submit" [ngClass]="!newUserForm.valid ? 'submit-invalid' : 'submit-add'" [disabled]="!newUserForm.valid"><i class="fa-solid fa-plus"></i></button>
+              </div>
             </form>
           </div>
         </div>

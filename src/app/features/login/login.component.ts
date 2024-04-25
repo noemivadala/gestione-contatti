@@ -14,9 +14,9 @@ import { CommonModule } from '@angular/common';
   imports: [ReactiveFormsModule, HttpClientModule, CommonModule],
   template: `
     <div class="container custom-container">
-      <div>
-        <h2 class="text-center">Benvenuto!</h2>
-        <p class="text-center">Accedi per visualizzare i contenuti</p>
+      <div class="text-center">
+        <h2>Benvenuto!</h2>
+        <p>Accedi per visualizzare i contenuti</p>
       </div>
       <form [formGroup]="loginform" (ngSubmit)="login()">
         <div class="form-group input-group">

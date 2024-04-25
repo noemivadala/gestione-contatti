@@ -15,7 +15,7 @@ import { UserModel } from '../../assets/user.model';
       </div>
       <div class="offcanvas-body">
         <h5 id="offcanvasRightLabel">Sei sicuro di voler eliminare<br>{{ data?.name }}?</h5>
-        <button type="button" class="btn btn-light mr-2" data-bs-dismiss="offcanvas">Annulla</button>
+        <button type="button" class="btn btn-light" data-bs-dismiss="offcanvas">Annulla</button>
         <button type="button" class="btn btn-danger" (click)="confirmDeleteUser()"><i class="fa-regular fa-trash-can fa-sm"></i> Conferma l'eliminazione</button>
       </div>
     </div>

@@ -29,8 +29,7 @@ body {
 }
 
 .form-edit input {
-    border: 1px solid #000;
-    margin: 0 15px;
+    border: 1px solid #b7b7b7;
 }
 
 #offcanvasRightLabel {
@@ -73,6 +72,10 @@ input {
     border-radius: 20px;
     width: 36px;
     height: 36px;
+}
+
+.btn-danger {
+    margin-left: 10px;
 }
 
 .custom-container {
@@ -120,6 +123,43 @@ input {
     .card {
         width: calc(100% - 20px);
     }
+
+    .btn-add-user {
+        font-size: 14px;
+    }
 }
 
+.grid-container {
+    display: grid;
+    grid-template-columns: repeat(4, 1fr);
+    gap: 10px;
+  }
+
+.grid-container-5 {
+    display: grid;
+    grid-template-columns: repeat(5, 1fr);
+    gap: 10px;
+}
   
+.grid-item {
+    width: 100%;
+}
+
+
+  
+@media (max-width: 767.98px) {
+
+    .grid-container {
+      grid-template-columns: 1fr;
+    }
+
+    .grid-container-5 {
+        grid-template-columns: 1fr;
+    }
+
+    .submit-invalid {
+      margin-top: 20px;
+      width: 27px;
+    }
+
+}

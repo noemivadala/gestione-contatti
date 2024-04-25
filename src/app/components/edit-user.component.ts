@@ -16,11 +16,21 @@ import { ToastrService } from 'ngx-toastr';
         <button type="button" class="btn-close text-reset" data-bs-dismiss="offcanvas" aria-label="Close"></button>
       </div>
       <div class="offcanvas-body small">
-        <form *ngIf="data" class="d-block d-flex form-edit" (ngSubmit)="editUserForm(editUserValue, data)" #editUserValue="ngForm">
-          <input type="text" class="form-control" id="nome" name="name" placeholder="{{data.name}}" ngModel (ngModelChange)="onUserDataChange($event, 'name')">
-          <input type="text" class="form-control" id="username" name="username" placeholder="{{data.username}}" ngModel (ngModelChange)="onUserDataChange($event, 'username')">
-          <input type="email" class="form-control" id="email" name="email" placeholder="{{data.email}}" ngModel (ngModelChange)="onUserDataChange($event, 'email')">
-          <input type="tel" class="form-control" id="phone" name="phone" placeholder="{{data.phone}}" ngModel (ngModelChange)="onUserDataChange($event, 'phone')">
+        <form *ngIf="data" class="form-edit" (ngSubmit)="editUserForm(editUserValue, data)" #editUserValue="ngForm">
+          <div class="grid-container">
+            <div class="grid-item">
+              <input type="text" class="form-control" id="nome" name="name" placeholder="{{data.name}}" ngModel (ngModelChange)="onUserDataChange($event, 'name')">
+            </div>
+            <div class="grid-item">
+              <input type="text" class="form-control" id="username" name="username" placeholder="{{data.username}}" ngModel (ngModelChange)="onUserDataChange($event, 'username')">
+            </div>
+            <div class="grid-item">
+              <input type="email" class="form-control" id="email" name="email" placeholder="{{data.email}}" ngModel (ngModelChange)="onUserDataChange($event, 'email')">
+            </div>
+            <div class="grid-item">
+              <input type="tel" class="form-control" id="phone" name="phone" placeholder="{{data.phone}}" ngModel (ngModelChange)="onUserDataChange($event, 'phone')">
+            </div>
+          </div>
         </form>
       </div>
     </div>
