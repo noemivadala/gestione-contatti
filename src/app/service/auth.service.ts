@@ -15,24 +15,20 @@ export class AuthService {
   constructor(private http: HttpClient, private store: Store, private router: Router) { }
 
   verifyCredentials(credentials: { username: string, password: string }): Observable<any> {
+    //chiamata al database
     return this.http.get<any>('http://localhost:4200/assets/db.json').pipe(
       map((data: any) => {
         const user = data.user.find((u: any) => u.username === credentials.username && u.password === credentials.password);
+        //se l'utente esiste fai
         if (user) {
           this.store.dispatch(AuthActions.loginSuccess());
-          console.log('è entrato dentro auth service');
           this.router.navigate(['/home']); // Reindirizza l'utente alla home
           return { success: true };
         } else {
-          this.store.dispatch(AuthActions.loginFailure({ error: 'Invalid credentials' }));
-          console.log('è entrato in else')
-          return { success: false, error: 'Invalid credentials' };
+          this.store.dispatch(AuthActions.loginFailure({ error: 'Credenziali non valide' }));
+          return { success: false, error: 'Credenziali non valide' };
         }
       }),
-      catchError(error => {
-        this.store.dispatch(AuthActions.loginFailure({ error: 'An error occurred during login' }));
-        return of({ success: false, error: 'An error occurred during login' });
-      })
     );
   }
 }

@@ -1,11 +1,11 @@
-import { HttpClientModule } from '@angular/common/http';
 import { Component } from '@angular/core';
+import { HttpClientModule } from '@angular/common/http';
 import { FormBuilder, ReactiveFormsModule, Validators } from '@angular/forms';
 import { Router } from '@angular/router';
 import { Store } from '@ngrx/store';
-import { ToastrService } from 'ngx-toastr';
 import * as AuthActions from '../../state/auth/auth.actions'
 import { AppState } from '../../state/auth/auth.reducer';
+import { ToastrService } from 'ngx-toastr';
 import { CommonModule } from '@angular/common';
 
 @Component({
@@ -48,15 +48,16 @@ export class LoginComponent {
     const username = this.loginform.value.username ?? '';
     const password = this.loginform.value.password ?? '';
   
+    // credenziali
     const credentials = {
       username,
       password
     };
-    console.log(credentials);
   
-    // Invia le credenziali al dispatcher
+    // invia le credenziali al dispatcher
     this.store.dispatch(AuthActions.requestLogin({ credentials }));
 
+    // pulisci il form
     this.loginform.reset();
   }
 };

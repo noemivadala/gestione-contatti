@@ -16,6 +16,7 @@ import { ToastrService } from 'ngx-toastr';
         <button type="button" class="btn-close text-reset" data-bs-dismiss="offcanvas" aria-label="Close"></button>
       </div>
       <div class="offcanvas-body small">
+        <!-- form modifica utente, passaggio dato e valore modificato -->
         <form *ngIf="data" class="form-edit" (ngSubmit)="editUserForm(editUserValue, data)" #editUserValue="ngForm">
           <div class="grid-container">
             <div class="grid-item">
@@ -38,10 +39,11 @@ import { ToastrService } from 'ngx-toastr';
   styles: ``
 })
 export class EditUserComponent {
-  
+
+  //passaggio dati
   @Input() data: UserModel | undefined;
-  @Input() userToUpdate: UserModel | null = null;
   @Input() users: UserModel[] = [];
+  @Input() userToUpdate: UserModel | null = null;
   @Input() userToSelect: any;
   @Output() userDataChanged = new EventEmitter<{ field: string, value: any }>();
 
@@ -60,8 +62,6 @@ export class EditUserComponent {
       this.jsonPlaceholder.editUser(data.id, updatedUser).subscribe((updatedUser: UserModel) => {
         // Aggiorna la lista
         this.users = this.users.map(u => (u.id === updatedUser.id ? updatedUser : u));
-
-        console.log(updatedUser);
       });
     }
 

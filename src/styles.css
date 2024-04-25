@@ -1,3 +1,11 @@
+/* 1 - Login */
+/* 2 - Card */
+/* 3 -Form */
+/* 4 - Form add */
+/* 5 - Form edit */
+/* 6 - Delete */
+/* 7 - Mobile */
+
 * {
    font-family: "Montserrat", sans-serif;
 }
@@ -6,10 +14,49 @@ body {
     background-color: #f0f7f6;
 }
 
+#offcanvasRightLabel {
+    font-size: 1.6rem;
+    line-height: 2.4rem;
+    margin-bottom: 10px;
+}
+
+.grid-container {
+    display: grid;
+    grid-template-columns: repeat(4, 1fr);
+    gap: 10px;
+}
+  
+.grid-item {
+    width: 100%;
+}
+
+/* 1 - Login */
+.custom-container {
+    margin-top: 5%;
+    max-width: 390px;
+    display: flexbox;
+    justify-content: center;
+    align-items: center;
+}
+
+.input-group {
+    margin-bottom: 18px;
+}
+
+.input-group-text {
+    background-color: #ffffff;
+    border: none;
+}
+
+.btn-submit {
+    width: 100%;
+}
+
+/* 2 - Card */
 .container-card {
     flex-wrap: wrap;
 }
-  
+
 .card {
     background-color: #f9fbfc;
     border: none;
@@ -28,29 +75,24 @@ body {
     padding: 20px;
 }
 
-.form-edit input {
-    border: 1px solid #b7b7b7;
+.btn-edit, .btn-delete {
+    margin-right: 10px;
+    background-color: #fff;
+    border: none;
+    border-radius: 20px;
+    width: 36px;
+    height: 36px;
 }
 
-#offcanvasRightLabel {
-    font-size: 1.6rem;
-    line-height: 2.4rem;
-    margin-bottom: 10px;
+/* 3 - Form */
+.form-control {
+    border: none;
 }
 
 input {
-    margin-left: 20px;
-    margin-left: 20px;
+    margin-left: 0px;
     border-radius: 8px;
     border: 5px solid white;
-}
-
-.submit-add {
-    background-color: #70e000;
-    border: none;
-    border-radius: 40px;
-    color: white;
-    margin-left: 18px;
 }
 
 .submit-invalid {
@@ -65,59 +107,37 @@ input {
     background-color: #0c5cd3;
 }
 
-.btn-edit, .btn-delete {
-    margin-right: 10px;
-    background-color: #fff;
-    border: none;
-    border-radius: 20px;
-    width: 36px;
-    height: 36px;
-}
-
-.btn-danger {
-    margin-left: 10px;
-}
-
-.custom-container {
-    margin-top: 5%;
-    max-width: 390px;
-    display: flexbox;
-    justify-content: center;
-    align-items: center;
-}
-
-.form-control {
-    border: none;
-}
-
+/* 4 - Form add */
 .newUserForm input {
     margin-right: 20px;
 }
 
-input {
-    margin-left: 0px;
+.grid-container-5 {
+    display: grid;
+    grid-template-columns: repeat(5, 1fr);
+    gap: 10px;
 }
 
-.input-group {
-    margin-bottom: 18px;
-}
-
-.input-group-text {
-    background-color: #ffffff;
+.submit-add {
+    background-color: #70e000;
     border: none;
+    border-radius: 40px;
+    color: white;
+    margin-left: 18px;
 }
 
-.input-error {
-    font-size: 0.8rem;
-    padding-top: 10px;
-    color: #c1121f;
-}
-
-.btn-submit {
-    width: 100%;
+/* 5 - Form edit */
+.form-edit input {
+    border: 1px solid #b7b7b7;
 }
 
 
+/* 6 - Delete */
+.btn-danger {
+    margin-left: 10px;
+}
+
+/* 7 - Mobile */
 @media (max-width: 767.98px) { 
 
     .card {
@@ -127,39 +147,17 @@ input {
     .btn-add-user {
         font-size: 14px;
     }
-}
-
-.grid-container {
-    display: grid;
-    grid-template-columns: repeat(4, 1fr);
-    gap: 10px;
-  }
-
-.grid-container-5 {
-    display: grid;
-    grid-template-columns: repeat(5, 1fr);
-    gap: 10px;
-}
-  
-.grid-item {
-    width: 100%;
-}
-
-
-  
-@media (max-width: 767.98px) {
 
     .grid-container {
-      grid-template-columns: 1fr;
+        grid-template-columns: 1fr;
     }
-
+  
     .grid-container-5 {
         grid-template-columns: 1fr;
     }
-
+  
     .submit-invalid {
-      margin-top: 20px;
-      width: 27px;
+        margin-top: 20px;
+        width: 27px;
     }
-
 }

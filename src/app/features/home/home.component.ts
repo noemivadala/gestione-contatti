@@ -18,7 +18,7 @@ import { ToastrService } from 'ngx-toastr';
         </div>
       </nav>
     </div>
-
+    <!-- titolo e bottone aggiungi utente -->
     <div class="container mb-5">
       <div class="container d-flex justify-content-between">
         <h2>📑 Lista contatti</h2>
@@ -26,7 +26,7 @@ import { ToastrService } from 'ngx-toastr';
           <i class="fa-solid fa-user-plus"></i> Aggiungi Contatto
         </button>
       </div>
-
+      <!-- form aggiungi utente -->
       <div class="container container-card d-flex mt-4 ">
         <div class="collapse w-100" id="collapseExample">
           <div class="card-form">
@@ -41,6 +41,7 @@ import { ToastrService } from 'ngx-toastr';
             </form>
           </div>
         </div>
+        <!-- lista utenti -->
         <div class="card d-flex justify-content-between" *ngFor="let user of users">
           <div class="detail-user">
             <p>Nome: {{ user.name }}</p>
@@ -48,12 +49,14 @@ import { ToastrService } from 'ngx-toastr';
             <p>Email: {{ user.email }}</p>
             <p>Telefono: {{ user.phone }}</p>
           </div>
+          <!-- bottoni elimina e modifica utente -->
           <div class="btn-user">
             <button class="btn btn-delete" (click)="selectUser(user)" type="button" data-bs-toggle="offcanvas" data-bs-target="#offcanvasRight" aria-controls="offcanvasRight"><i class="fa-regular fa-trash-can fa-sm"></i></button>
             <button class="btn btn-edit" (click)="selectUser(user)" type="button" data-bs-toggle="offcanvas" data-bs-target="#offcanvasBottom" aria-controls="offcanvasBottom"><i class="fa-regular fa-pen-to-square fa-sm"></i></button>
           </div>
         </div>
       </div>
+      <!-- caricamento componenti edit e delete -->
       <app-edit-user [data]="userToSelect" (userDataChanged)="updateUserData($event)"></app-edit-user>
       <app-delete-user [data]="userToSelect" (deleteConfirmed)="deleteUser($event)"></app-delete-user>
     </div>
@@ -92,7 +95,6 @@ export class HomeComponent {
   
   addUser(newUserForm: any) {
     if (newUserForm && newUserForm.valid) {
-
       const newUser: UserModel = {
         id: this.lastUserId,
         name: newUserForm.value.name,
@@ -100,28 +102,32 @@ export class HomeComponent {
         email: newUserForm.value.email,
         phone: newUserForm.value.phone
       }
+      // Chiamata creazione utente
       this.jsonPlaceholder.createUser(newUser).subscribe((createdUser: UserModel) => {
-        createdUser.id = ++this.lastUserId;
+        createdUser.id = ++this.lastUserId; // Incremento Id
         this.users.unshift(createdUser); // Aggiunto alla lista
         this.toastr.success('Utente aggiunto');
         newUserForm.resetForm();
       });
     } else {
+      // notifica errore
       this.toastr.error('Controlla i campi del modulo');
     }
   }
 
+  // Metodo modifica utente
   editUser(user: UserModel) {
     this.userToUpdate = user;
-    console.log(user);
   }
 
+  // Aggiornamento dati utente
   updateUserData(event: { field: string, value: any }) {
     if (this.userToSelect) {
       this.userToSelect[event.field] = event.value;
     }
   }
-  
+
+  // Eliminazione utente
   deleteUser(id: number) {
     this.jsonPlaceholder.deleteUser(id).subscribe(() => {
       this.users = this.users.filter(user => user.id !== id);

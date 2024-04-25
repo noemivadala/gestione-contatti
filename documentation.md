@@ -16,7 +16,7 @@ Gestisce l'autenticazione e utilizza NgRx per la gestione dello stato dell'auten
 ### Cartella `state/auth`:
 Contiene tre file:
 - `auth.actions`: Definisce le azioni relative all'autenticazione, come il login e il logout.
-- `auth.effects`: Gestisce gli effetti collaterali delle azioni di autenticazione, come le chiamate API.
+- `auth.effects`: Gestisce gli effetti collaterali delle azioni di autenticazione.
 - `auth.reducer`: Definisce il riduttore per l'autenticazione, che modifica lo stato in base alle azioni.
 
 ### File di Configurazione del Routing:
@@ -31,7 +31,7 @@ Contiene il database con le credenziali degli utenti.
 
 ### Componente Home:
 - **Descrizione**: Rappresenta la pagina principale dell'applicazione. Gestisce l'aggiunta di nuovi utenti tramite un form e visualizza i componenti per la modifica e l'eliminazione degli utenti.
-- **Proprietà**: Nessuna proprietà specifica.
+
 - **Metodi**:
   - `addUser(userData: any)`: Metodo chiamato al momento della sottomissione del form di aggiunta utente. Aggiunge un nuovo utente utilizzando i dati forniti.
 
