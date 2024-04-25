@@ -1,27 +1,40 @@
-# GestioneContatti
+# Setup e Avvio dell'Ambiente di Sviluppo per l'Applicazione Angular
 
-This project was generated with [Angular CLI](https://github.com/angular/angular-cli) version 17.3.5.
+## Prerequisiti
+- Node.js e npm (Node Package Manager) installati sul tuo sistema.
+- Angular CLI (Command Line Interface) installato globalmente. Se non è già installato, puoi installarlo eseguendo il comando:
 
-## Development server
+npm install -g @angular/cli
 
-Run `ng serve` for a dev server. Navigate to `http://localhost:4200/`. The application will automatically reload if you change any of the source files.
 
-## Code scaffolding
+## Configurazione e Setup
 
-Run `ng generate component component-name` to generate a new component. You can also use `ng generate directive|pipe|service|class|guard|interface|enum|module`.
+### 1. Clonare il Repository
+ - Clona il repository dell'applicazione Angular sul tuo computer.
 
-## Build
+### 2. Installare le Dipendenze
+ - Apri un terminale o una finestra del prompt dei comandi nella directory del progetto.
+ - Esegui il comando:
+   ```
+   npm install
+   ```
+ Questo installerà tutte le dipendenze definite nel file `package.json`.
 
-Run `ng build` to build the project. The build artifacts will be stored in the `dist/` directory.
+### 3. Configurare l'Ambiente
+ - Assicurati di configurare correttamente l'URL del servizio JSON Placeholder o del tuo backend nell'applicazione. Puoi fare ciò modificando l'URL nel servizio `AuthService` o in qualsiasi altro servizio che effettua chiamate API.
 
-## Running unit tests
+## Avvio dell'Ambiente di Sviluppo
 
-Run `ng test` to execute the unit tests via [Karma](https://karma-runner.github.io).
+Una volta completata la configurazione, puoi avviare l'ambiente di sviluppo dell'applicazione Angular utilizzando Angular CLI.
 
-## Running end-to-end tests
+- Esegui il seguente comando nella directory del progetto:
 
-Run `ng e2e` to execute the end-to-end tests via a platform of your choice. To use this command, you need to first add a package that implements end-to-end testing capabilities.
+ng serve
 
-## Further help
 
-To get more help on the Angular CLI use `ng help` or go check out the [Angular CLI Overview and Command Reference](https://angular.io/cli) page.
+Questo avvierà il server di sviluppo Angular e compilerà l'applicazione. Dopo la compilazione, dovresti poter visualizzare l'applicazione nel browser all'indirizzo `http://localhost:4200`.
+
+Ora sei pronto per sviluppare e testare l'applicazione Angular sul tuo ambiente locale!
+
+Se incontri problemi durante la configurazione o l'avvio dell'ambiente di sviluppo, assicurati di seguire attentamente i passaggi sopra descritti e controlla la documentazione ufficiale di Angular per ulteriori informazioni.
+
